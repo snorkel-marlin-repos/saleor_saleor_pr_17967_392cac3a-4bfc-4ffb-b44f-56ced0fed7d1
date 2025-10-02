@@ -1,5 +1,4 @@
 import datetime
-import warnings
 from unittest.mock import patch
 from urllib.parse import urlencode
 
@@ -557,10 +556,7 @@ def test_account_reset_password_no_channel_provided_one_channel(
     }
 
     # when
-    # Catch deprecation warning for missing channel slug
-    # This is to ensure that the warning is not raised in the test output.
-    with warnings.catch_warnings(record=True):
-        response = api_client.post_graphql(REQUEST_PASSWORD_RESET_MUTATION, variables)
+    response = api_client.post_graphql(REQUEST_PASSWORD_RESET_MUTATION, variables)
     content = get_graphql_content(response)
 
     # then
